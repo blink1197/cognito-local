@@ -1,0 +1,8 @@
+{
+  "LambdaClient": {
+    "endpoint": "http://host.docker.internal:3002"
+  },
+  "TriggerFunctions": {
+    "CustomMessage": "the-generals-api-dev-cognitoCustomMessage"
+  }
+}

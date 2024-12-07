@@ -1,0 +1,16 @@
+{
+  "Clients": {
+    "45ot5bjlpj51gm6sobmsjamna": {
+      "ClientId": "45ot5bjlpj51gm6sobmsjamna",
+      "ClientName": "TheGeneralsAppClient-dev",
+      "CreationDate": "2024-09-03T04:20:00.592Z",
+      "LastModifiedDate": "2024-09-03T04:20:00.592Z",
+      "TokenValidityUnits": {
+        "AccessToken": "hours",
+        "IdToken": "minutes",
+        "RefreshToken": "days"
+      },
+      "UserPoolId": "local_5vGH0o1R"
+    }
+  }
+}

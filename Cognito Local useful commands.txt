@@ -1,0 +1,65 @@
+Cognito Local useful commands
+
+Run Cognito Local
+docker run --publish 9229:9229 --volume C:/Users/Cris/Documents/GitHub/cognito-local/.cognito:/app/.cognito jagregory/cognito-local:latest
+
+Create UserPool
+aws --endpoint http://localhost:9229 cognito-idp create-user-pool --pool-name <-user-pool-name>
+aws --endpoint http://localhost:9229 cognito-idp create-user-pool --pool-name TheGeneralsUserPool-dev --auto-verified-attributes email 
+local_5vGH0o1R
+
+Delete UserPool
+aws --endpoint http://localhost:9229 cognito-idp delete-user-pool --user-pool-id <your-user-pool-id>
+aws --endpoint http://localhost:9229 cognito-idp delete-user-pool --user-pool-id local_0ecy8aia
+
+List UserPools
+aws --endpoint http://localhost:9229 cognito-idp list-user-pools --max-results 10 --region <your-region>
+
+Update user pool with email verification
+aws --endpoint http://localhost:9229 cognito-idp update-user-pool --user-pool-id local_5GTB2u5X --auto-verified-attributes email
+
+Create App Client 
+aws --endpoint http://localhost:9229 cognito-idp create-user-pool-client --user-pool-id <your-user-pool-id> --client-name <-app-client-name>
+aws --endpoint http://localhost:9229 cognito-idp create-user-pool-client --user-pool-id local_5vGH0o1R --client-name TheGeneralsAppClient-dev
+45ot5bjlpj51gm6sobmsjamna
+
+List App Clients
+aws --endpoint http://localhost:9229 cognito-idp list-user-pool-clients --user-pool-id local_5GTB2u5X --region yourRegion
+
+List Users
+aws --endpoint http://localhost:9229 cognito-idp list-users --user-pool-id <your-user-pool-id>
+aws --endpoint http://localhost:9229 cognito-idp list-users --user-pool-id local_3PYzgPyg 
+
+Delete Users
+aws --endpoint http://localhost:9229 cognito-idp admin-delete-user --user-pool-id YOUR_USER_POOL_ID --username USERNAME
+aws --endpoint http://localhost:9229 cognito-idp admin-delete-user --user-pool-id local_3PYzgPyg  --username bagotsay1197@gmail.com
+
+Confirm User sign up
+aws --endpoint http://localhost:9229 cognito-idp admin-confirm-sign-up --user-pool-id YOUR_USER_POOL_ID --username USERNAME
+aws --endpoint http://localhost:9229 cognito-idp admin-confirm-sign-up --user-pool-id local_3PYzgPyg --username bagotsay1197@gmail.com
+
+Describe User Pool
+aws --endpoint http://localhost:9229 cognito-idp describe-user-pool --user-pool-id local_3PYzgPyg
+
+aws --endpoint-url http://localhost:9229 cognito-idp update-user-pool --user-pool-id YOUR_USER_POOL_ID --auto-verified-attributes email 
+
+
+Update User Pool
+aws --endpoint http://localhost:9229 cognito-idp update-user-pool --user-pool-id local_3PYzgPyg --schema file://update-schema.json
+aws --endpoint http://localhost:9229 cognito-idp add-custom-attributes --user-pool-id local_5vGH0o1R --custom-attributes file://custom-attributes.json
+
+
+
+aws --endpoint http://localhost:9229 cognito-idp update-user-pool --user-pool-id local_3PYzgPyg --lambda-config CustomMessage=http://host.docker.internal:3002/2015-03-31/functions/customMessage/invocations
+
+aws --endpoint http://localhost:9229 cognito-idp update-user-pool --user-pool-id local_3PYzgPyg --lambda-config CustomMessage=http://0.0.0.0:3002/2015-03-31/functions/customMessage/invocations
+
+aws --endpoint http://localhost:9229 cognito-idp update-user-pool --user-pool-id local_3PYzgPyg --lambda-config {"CustomMessage": "customMessage"}
+
+aws --endpoint http://localhost:9229 cognito-idp describe-user-pool --user-pool-id local_5GTB2u5X
+
+aws --endpoint-url http://localhost:9229 cognito-idp update-user-pool --user-pool-id local_3PYzgPyg --lambda-config "{}"
+
+
+
+curl -X POST http://localhost:3001/cognitoCustomMessage/ -H "Content-Type: application/json" -d '{"triggerSource": "CustomMessage_SignUp", "request": {"codeParameter": "123456"},"userName": "testuser","response": {}}'
